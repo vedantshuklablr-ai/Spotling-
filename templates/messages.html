@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Online Safety Messages and Tips - Spotling" />
+    <title>Online Safety Tips - Spotling</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="skip-link">
+      <a href="#main-content">Skip to main content</a>
+    </div>
+
+    <header class="header" role="banner">
+      <div class="header-content">
+        <div class="header-top">
+          <div>
+            <h1>💬 Online Safety Messages</h1>
+            <a href="/" style="color: var(--link-color); text-decoration: none; font-size: 0.9rem;">← Back to Analysis</a>
+          </div>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+        </div>
+        <p class="subtitle">
+          Essential safety tips and protective measures for online security
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-container">
+      <!-- Navigation -->
+      <nav class="page-nav">
+        <a href="/" class="nav-link">🔍 Analyzer</a>
+        <a href="/fraud-alerts" class="nav-link">⚠️ Fraud Alerts</a>
+        <a href="/marketing-fraud" class="nav-link">💰 Marketing Fraud</a>
+        <a href="/guidelines" class="nav-link">⚖️ Guidelines</a>
+        <a href="/helplines" class="nav-link">📞 Helplines</a>
+        <a href="/messages" class="nav-link active">💬 Safety Tips</a>
+      </nav>
+
+      <!-- Core Safety Principles -->
+      <section class="panel content-section">
+        <h2>🛡️ Core Online Safety Principles</h2>
+        
+        <div class="principle-grid">
+          <div class="principle-card">
+            <h3>🔓 NEVER Share These</h3>
+            <ul>
+              <li>✗ Passwords (even with customer service)</li>
+              <li>✗ OTP/CVV/PIN codes</li>
+              <li>✗ Aadhaar/PAN numbers via phone/email</li>
+              <li>✗ Debit/Credit card details casually</li>
+              <li>✗ Social Security equivalent numbers</li>
+              <li>✗ Private keys or recovery codes</li>
+              <li>✗ 2FA/Authenticator codes</li>
+              <li>✗ Passport or visa information</li>
+            </ul>
+          </div>
+
+          <div class="principle-card">
+            <h3>✅ Always DO These</h3>
+            <ul>
+              <li>✓ Create strong, unique passwords</li>
+              <li>✓ Enable two-factor authentication (2FA)</li>
+              <li>✓ Verify URLs before entering credentials</li>
+              <li>✓ Update software and apps regularly</li>
+              <li>✓ Use trusted antivirus software</li>
+              <li>✓ Monitor bank/email statements</li>
+              <li>✓ Backup important data regularly</li>
+              <li>✓ Log out of accounts when done</li>
+            </ul>
+          </div>
+
+          <div class="principle-card">
+            <h3>❌ Never DO These</h3>
+            <ul>
+              <li>✗ Click links from unknown sources</li>
+              <li>✗ Download files from untrusted sites</li>
+              <li>✗ Use public WiFi for banking</li>
+              <li>✗ Reuse passwords across sites</li>
+              <li>✗ Reply to unsolicited messages</li>
+              <li>✗ Give remote access to strangers</li>
+              <li>✗ Pay before verifying seller</li>
+              <li>✗ Ignore security warnings</li>
+            </ul>
+          </div>
+
+          <div class="principle-card">
+            <h3>🔄 When in Doubt</h3>
+            <ul>
+              <li>🔍 Verify independently before acting</li>
+              <li>📞 Call official numbers to verify claims</li>
+              <li>⏸️ Take time - legitimate offers wait</li>
+              <li>❓ Ask questions - legitimate services answer</li>
+              <li>📋 Get everything in writing</li>
+              <li>🤝 Involve a trusted friend/family member</li>
+              <li>⚖️ Consult professionals when needed</li>
+              <li>📣 Report suspicious activity immediately</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Password Security -->
+      <section class="panel content-section">
+        <h2>🔐 Password Security Guide</h2>
+        
+        <div class="security-guide">
+          <h3>What Makes a Strong Password?</h3>
+          <div class="password-checklist">
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <h4>8+ Characters (ideally 12+)</h4>
+                <p>Longer passwords are exponentially harder to crack.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <h4>Mix of Upper & Lowercase</h4>
+                <p>Use both Capital and small letters (e.g., "Password123")</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <h4>Numbers & Special Characters</h4>
+                <p>Include digits (1-9) and symbols (!@#$%^&*)</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✓</span>
+              <div>
+                <h4>Unique per Account</h4>
+                <p>Don't reuse passwords. Use password managers to remember them.</p>
+              </div>
+            </div>
+            <div class="check-item">
+              <span class="check-icon">✗</span>
+              <div>
+                <h4>Avoid These</h4>
+                <p>DON'T use birthdays, names, sequential numbers (12345), or dictionary words.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">Password Manager Recommendations</h3>
+          <ul>
+            <li><strong>LastPass, 1Password, Bitwarden:</strong> Store and generate secure passwords</li>
+            <li><strong>Benefits:</strong> Remember only 1 master password, auto-fill on websites</li>
+            <li><strong>Security:</strong> Use a very strong master password</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Two-Factor Authentication -->
+      <section class="panel content-section">
+        <h2>🔑 Two-Factor Authentication (2FA)</h2>
+        
+        <div class="security-guide">
+          <p><strong>What it is:</strong> Adding a second verification step after entering your password.</p>
+          
+          <h3>Types of 2FA (Ranked by Security)</h3>
+          <div class="auth-types">
+            <div class="auth-type high">
+              <h4>1. 🔐 Authenticator Apps (BEST)</h4>
+              <p><strong>Examples:</strong> Google Authenticator, Microsoft Authenticator, Authy</p>
+              <ul>
+                <li>Generate time-based codes that work only on your device</li>
+                <li>No SMS interception possible</li>
+                <li>Setup: Scan QR code in app, enable on account</li>
+              </ul>
+            </div>
+
+            <div class="auth-type high">
+              <h4>2. 🔐 Hardware Security Keys (BEST for High-Value)</h4>
+              <p><strong>Examples:</strong> YubiKey, Google Titan</p>
+              <ul>
+                <li>Physical USB device you insert</li>
+                <li>Impossible to hack remotely</li>
+                <li>Best for sensitive accounts (email, banking)</li>
+              </ul>
+            </div>
+
+            <div class="auth-type medium">
+              <h4>3. 📱 SMS/Call Verification (Good but Risky)</h4>
+              <p><strong>Process:</strong> Code sent to your phone via SMS or call</p>
+              <ul>
+                <li>Better than no 2FA but vulnerable to SIM swapping</li>
+                <li>If available, always choose this over nothing</li>
+                <li>Be cautious of SIM swap attacks</li>
+              </ul>
+            </div>
+
+            <div class="auth-type low">
+              <h4>4. ❓ Security Questions (Weakest)</h4>
+              <p><strong>Examples:</strong> "First pet's name?", "Mother's maiden name?"</p>
+              <ul>
+                <li>Answers can be researched or guessed</li>
+                <li>Use as backup only, not primary 2FA</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">⚠️ Important 2FA Warnings</h3>
+          <ul>
+            <li>NEVER share 2FA codes even with "support staff" or "bank"</li>
+            <li>NEVER take screenshots of authenticator backups</li>
+            <li>Save backup codes in a safe location (encrypted or physical safe)</li>
+            <li>Be aware of SIM swap scams - use passwords to lock your SIM</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Phishing Protection -->
+      <section class="panel content-section">
+        <h2>🎣 How to Spot & Avoid Phishing</h2>
+        
+        <div class="security-tips">
+          <h3>🚩 Warning Signs of Phishing</h3>
+          <div class="warning-list">
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Generic Greetings:</strong> "Dear Customer" instead of your actual name</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Urgent Action Required:</strong> "Verify your account immediately" or "Account will be closed"</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Suspicious Links:</strong> Hover over link - does URL match the company's actual domain?</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Grammar & Spelling Errors:</strong> Professional companies don't have mistakes</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Unusual Sender Address:</strong> Email from unknown or suspicious domain</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Requests for Sensitive Info:</strong> Real companies never ask for passwords via email</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Unexpected Attachments:</strong> Especially .exe, .zip, or macro-enabled documents</p>
+            </div>
+            <div class="warning-item">
+              <span class="warning-icon">🚩</span>
+              <p><strong>Too-Good-To-Be-True Offers:</strong> "You've won a prize you never entered"</p>
+            </div>
+          </div>
+
+          <h3 style="margin-top: 1.5rem;">✅ Best Practices</h3>
+          <ul>
+            <li>Never click links in emails - go directly to website by typing URL</li>
+            <li>Check sender email carefully (e.g., "apple.com" vs "apple-security.com")</li>
+            <li>Hover over links before clicking to see actual URL</li>
+            <li>Call the company directly using a number from their official website</li>
+            <li>Use email filters and antivirus that flag phishing attempts</li>
+            <li>Report phishing emails to the company's security team</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Social Media Safety -->
+      <section class="panel content-section">
+        <h2>📱 Social Media Safety</h2>
+        
+        <div class="security-tips">
+          <h3>🔒 Protect Your Social Media Account</h3>
+          <div class="social-tips">
+            <div class="tip-box">
+              <h4>Privacy Settings</h4>
+              <ul>
+                <li>Set profile to "Private" or "Friends Only"</li>
+                <li>Limit who can see your posts and information</li>
+                <li>Disable location tagging on photos</li>
+                <li>Turn off search engine indexing of your profile</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4>What NOT to Post</h4>
+              <ul>
+                <li>Real-time location or plans (share after, not during)</li>
+                <li>Personal documents, passport photos, IDs</li>
+                <li>Family member's names or relationships</li>
+                <li>Daily routines or when you'll be away</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4>Scam Prevention</h4>
+              <ul>
+                <li>Don't click suspicious links in messages</li>
+                <li>Be suspicious of people asking personal questions</li>
+                <li>Don't send money to online "friends" you haven't met</li>
+                <li>Verify friend requests from people you know (account could be fake)</li>
+              </ul>
+            </div>
+
+            <div class="tip-box">
+              <h4>Bot & Fake Account Detection</h4>
+              <ul>
+                <li>No profile picture or generic images = suspicious</li>
+                <li>Brand new account with few followers = fake</li>
+                <li>Unusual follower count vs. engagement rate</li>
+                <li>Spam or repetitive comments = bot</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Mobile & Device Security -->
+      <section class="panel content-section">
+        <h2>📱 Device & App Security</h2>
+        
+        <div class="device-security">
+          <div class="security-section">
+            <h3>🔐 Regular Maintenance</h3>
+            <ul>
+              <li><strong>Updates:</strong> Always update OS, apps, and security patches immediately</li>
+              <li><strong>Antivirus:</strong> Install trusted antivirus/malware protection</li>
+              <li><strong>Firewall:</strong> Enable device firewall for extra protection</li>
+              <li><strong>Backups:</strong> Regular backups protect against ransomware</li>
+            </ul>
+          </div>
+
+          <div class="security-section">
+            <h3>🍎 App Security</h3>
+            <ul>
+              <li>Download only from Official App Store or Google Play</li>
+              <li>Check app permissions before installing</li>
+              <li>Delete unused apps you don't need anymore</li>
+              <li>Be cautious of app permission requests (camera, location, contacts)</li>
+              <li>Don't sideload apps from unknown sources</li>
+            </ul>
+          </div>
+
+          <div class="security-section">
+            <h3>🖥️ Computer Safety</h3>
+            <ul>
+              <li>Use a strong login password (6+ characters)</li>
+              <li>Lock your screen when away (Windows+L)</li>
+              <li>Turn off remote access unless needed</li>
+              <li>Disable USB auto-play to prevent malware from USB drives</li>
+              <li>Use VPN on public WiFi for banking/sensitive activities</li>
+            </ul>
+          </div>
+
+          <div class="security-section">
+            <h3>🌐 WiFi Safety</h3>
+            <ul>
+              <li><strong>Avoid Public WiFi for:</strong> Banking, passwords, sensitive personal info</li>
+              <li><strong>Use VPN:</strong> Consider NordVPN, ExpressVPN for protection on public networks</li>
+              <li><strong>Verify Network:</strong> Ask staff for official WiFi name (SSID)</li>
+              <li><strong>Disable Auto-Connect:</strong> Turn off auto-connect to networks</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Shopping Safety -->
+      <section class="panel content-section">
+        <h2>🛒 Online Shopping Safety</h2>
+        
+        <div class="shopping-guide">
+          <div class="shop-section">
+            <h3>Before You Buy</h3>
+            <ul>
+              <li>Research seller: Check reviews on independent sites</li>
+              <li>Verify website: Visit through official website, not links from ads/emails</li>
+              <li>Check security: Look for padlock icon and "https://" in URL</li>
+              <li>Compare prices: Extremely low prices often indicate fakes</li>
+              <li>Read return policy: Ensure 30+ days return/refund available</li>
+            </ul>
+          </div>
+
+          <div class="shop-section">
+            <h3>Payment Methods</h3>
+            <ul>
+              <li><strong>Best:</strong> Credit card (fraud protection), digital wallets (Google Pay, Apple Pay)</li>
+              <li><strong>Good:</strong> Debit card with fraud protection enabled</li>
+              <li><strong>Risky:</strong> Cash on delivery (if seller is unknown), Bank transfer</li>
+              <li><strong>Avoid:</strong> Cryptocurrency, Direct bank transfer, Gift cards</li>
+            </ul>
+          </div>
+
+          <div class="shop-section">
+            <h3>Red Flags</h3>
+            <ul>
+              <li>Sellers only accepting cash/cryptocurrency</li>
+              <li>Asking you to buy from different website</li>
+              <li>No way to contact seller customer service</li>
+              <li>Images appear AI-generated or heavily edited</li>
+              <li>Unrealistic discounts (80% off on new electronics)</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Banking Safety -->
+      <section class="panel content-section">
+        <h2>🏦 Secure Banking Online</h2>
+        
+        <div class="banking-guide">
+          <h3>Essential Rules</h3>
+          <div class="banking-rules">
+            <div class="rule">
+              <h4>🔐 NEVER Share</h4>
+              <ul>
+                <li>Password or PIN</li>
+                <li>OTP (One-Time Password)</li>
+                <li>CVV (Card verification code)</li>
+                <li>Card expiry date or full card number</li>
+              </ul>
+            </div>
+
+            <div class="rule">
+              <h4>✅ Always Verify</h4>
+              <ul>
+                <li>HTTPS secure connection (padlock icon)</li>
+                <li>Official bank website URL (check carefully)</li>
+                <li>No unexpected requests for sensitive information</li>
+                <li>Bank contact via official number from statement</li>
+              </ul>
+            </div>
+
+            <div class="rule">
+              <h4>⚠️ Be Alert For</h4>
+              <ul>
+                <li>Pop-ups claiming to verify your account</li>
+                <li>Unexpected OTPs you didn't request</li>
+                <li>Login attempts from unfamiliar locations</li>
+                <li>Transactions you don't recognize</li>
+              </ul>
+            </div>
+
+            <div class="rule">
+              <h4>📊 Regular Monitoring</h4>
+              <ul>
+                <li>Check statements weekly, not just monthly</li>
+                <li>Set up transaction alerts</li>
+                <li>Monitor credit score regularly</li>
+                <li>Report discrepancies within 24 hours</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Emergency Action Plan -->
+      <section class="panel content-section">
+        <h2>🆘 If Something Goes Wrong</h2>
+        
+        <div class="emergency-plan">
+          <div class="situation">
+            <h3>If You Think You've Been Hacked</h3>
+            <ol>
+              <li>STOP using the device immediately for sensitive activities</li>
+              <li>Change passwords from a different safe computer</li>
+              <li>Enable 2FA if not already active</li>
+              <li>Check account activity for unauthorized changes</li>
+              <li>Scan device with antivirus software</li>
+              <li>Run malware removal tools</li>
+              <li>Contact affected services (email, bank, social media)</li>
+              <li>If needed, consider professional cybersecurity help</li>
+            </ol>
+          </div>
+
+          <div class="situation">
+            <h3>If You've Shared Sensitive Information</h3>
+            <ol>
+              <li>Change the password immediately</li>
+              <li>Enable 2FA on that account</li>
+              <li>Monitor the account closely</li>
+              <li>Check if it's used for password recovery on other accounts</li>
+              <li>If it was a financial account, contact the institution</li>
+              <li>Freeze credit if it was financial data</li>
+              <li>File a fraud report if money was lost</li>
+            </ol>
+          </div>
+
+          <div class="situation">
+            <h3>If You've Transferred Money by Mistake</h3>
+            <ol>
+              <li>Contact your bank IMMEDIATELY (don't wait)</li>
+              <li>Provide transaction details and recipient information</li>
+              <li>Ask bank to initiate reversal (within 24 hours possible)</li>
+              <li>File cyber crime complaint (cybercrime.gov.in)</li>
+              <li>Get FIR number from police</li>
+              <li>Document everything for legal proceedings</li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- Key Reminders -->
+      <section class="panel content-section">
+        <h2>💡 Key Safety Reminders</h2>
+        <div class="reminders">
+          <div class="reminder-box high">
+            <h3>🚨 Remember</h3>
+            <ul>
+              <li>If it seems too good to be true, it probably is</li>
+              <li>Your bank NEVER asks for password/OTP via calls/emails</li>
+              <li>Legitimate companies don't pressure you or threaten arrest</li>
+              <li>Take time for big decisions - real opportunities don't expire in hours</li>
+              <li>When in doubt, ask a trusted friend or expert</li>
+            </ul>
+          </div>
+
+          <div class="reminder-box">
+            <h3>📢 Stay Informed</h3>
+            <ul>
+              <li>Follow official government cybersecurity accounts</li>
+              <li>Read fraud awareness materials regularly</li>
+              <li>Stay updated on new scam tactics</li>
+              <li>Share safety tips with family and friends</li>
+              <li>Help elderly family members understand online risks</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <p>
+        🔬 <strong>Spotling - Online Safety Hub</strong> – Protect yourself, protect others.
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+        Stay informed. Stay cautious. Stay safe online.
+      </p>
+    </footer>
+
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      html.setAttribute('data-theme', savedTheme);
+      themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+      
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      });
+    </script>
+  </body>
+</html>

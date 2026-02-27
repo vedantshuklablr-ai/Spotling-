@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Fraud Alerts and Common Scams - Learn how to protect yourself" />
+    <title>Fraud Alerts - Spotling</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+  <body>
+    <div class="skip-link">
+      <a href="#main-content">Skip to main content</a>
+    </div>
+
+    <header class="header" role="banner">
+      <div class="header-content">
+        <div class="header-top">
+          <div>
+            <h1>⚠️ Fraud Alerts</h1>
+            <a href="/" style="color: var(--link-color); text-decoration: none; font-size: 0.9rem;">← Back to Analysis</a>
+          </div>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark/light mode">🌙</button>
+        </div>
+        <p class="subtitle">
+          Learn about common fraud and scam tactics to protect yourself online
+        </p>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-container">
+      <!-- Navigation -->
+      <nav class="page-nav">
+        <a href="/" class="nav-link">🔍 Analyzer</a>
+        <a href="/fraud-alerts" class="nav-link active">⚠️ Fraud Alerts</a>
+        <a href="/marketing-fraud" class="nav-link">💰 Marketing Fraud</a>
+        <a href="/guidelines" class="nav-link">⚖️ Guidelines</a>
+        <a href="/helplines" class="nav-link">📞 Helplines</a>
+        <a href="/messages" class="nav-link">💬 Safety Tips</a>
+      </nav>
+
+      <!-- Common Fraud Types -->
+      <section class="panel content-section">
+        <h2>🎯 Common Fraud and Scam Types</h2>
+        
+        <div class="alert-card alert-high">
+          <h3>❌ Phishing Scams</h3>
+          <p><strong>What it is:</strong> Fraudsters impersonate legitimate companies to steal your personal information, passwords, or banking details through fake emails, SMS, or links.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Requests for password or OTP via email/SMS</li>
+            <li>Urgent action required messages</li>
+            <li>Suspicious links from "official" companies</li>
+            <li>Grammar errors in official communications</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Never click links in unsolicited emails, verify URLs before clicking, enable 2FA, and call the company directly to verify if unsure.</p>
+        </div>
+
+        <div class="alert-card alert-high">
+          <h3>💳 Online Payment Fraud</h3>
+          <p><strong>What it is:</strong> Scammers conduct fraudulent transactions, duplicate cards, or use stolen payment information for unauthorized purchases.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Unexpected payment requests from known vendors</li>
+            <li>Suspicious transaction notifications</li>
+            <li>Being asked to share card/UPI details</li>
+            <li>Requests to pay in advance with untraceable methods</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Use secure payment gateways, never share OTP/CVV, monitor bank statements regularly, and report unauthorized transactions immediately.</p>
+        </div>
+
+        <div class="alert-card alert-high">
+          <h3>🎁 Prize/Lottery Scams</h3>
+          <p><strong>What it is:</strong> You receive notifications that you've won a prize or lottery you never entered, and are asked to pay fees to claim it.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Winning claims from unknown lotteries</li>
+            <li>Requests for upfront payment to claim prize</li>
+            <li>Pressure to act immediately</li>
+            <li>Low quality graphics or poor language</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Never pay money to claim prizes, verify the lottery officially, and remember legitimate lotteries don't ask for advance fees.</p>
+        </div>
+
+        <div class="alert-card alert-high">
+          <h3>👤 Identity Theft</h3>
+          <p><strong>What it is:</strong> Criminals steal your personal information and use it to open accounts, make purchases, or apply for loans in your name.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Unexpected bills or account notifications</li>
+            <li>Loan rejections due to accounts you didn't open</li>
+            <li>Missing mail or documents</li>
+            <li>Requests for Aadhaar/PAN numbers from unknown sources</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Safeguard your Aadhaar/PAN, don't share personal documents casually, monitor credit reports, and freeze credit if compromised.</p>
+        </div>
+
+        <div class="alert-card alert-medium">
+          <h3>💼 Job/Employment Scams</h3>
+          <p><strong>What it is:</strong> Fake job offers that require upfront payment for training, placement fees, or processing charges.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Job offers via unsolicited messages</li>
+            <li>No proper interview process</li>
+            <li>Requests for money upfront</li>
+            <li>Too-good-to-be-true salary offers</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Apply through official company websites, verify company contact details independently, never pay upfront, and ask for details in writing.</p>
+        </div>
+
+        <div class="alert-card alert-medium">
+          <h3>👨‍👩‍👧 Romance/Catfishing Scams</h3>
+          <p><strong>What it is:</strong> Scammers create fake profiles to build emotional relationships and then ask for money under false pretenses.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Refusal to video chat despite long conversations</li>
+            <li>Quick profession of love and emotional dependence</li>
+            <li>Requests for money for emergencies</li>
+            <li>Stolen or professional photos as profile pictures</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Video verify before meeting, don't send money to people you haven't met, be skeptical of sudden love declarations, and report suspicious profiles.</p>
+        </div>
+
+        <div class="alert-card alert-medium">
+          <h3>🏠 Real Estate Scams</h3>
+          <p><strong>What it is:</strong> Unauthorized listings, fake rental agreements, or asking for advance payments for properties that don't belong to the scammer.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Properties listed below market rate</li>
+            <li>Unwillingness to provide legal documentation</li>
+            <li>Requests for cash payments only</li>
+            <li>Pressure to decide quickly</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Verify property documents, deal with registered agents, don't make payments before document verification, and involve a lawyer.</p>
+        </div>
+
+        <div class="alert-card alert-medium">
+          <h3>📱 Tech Support Scams</h3>
+          <p><strong>What it is:</strong> Pop-ups or calls claiming your device has viruses, asking you to call a number and give remote access or money.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Unsolicited pop-ups claiming security issues</li>
+            <li>Unknown callers claiming to be from tech companies</li>
+            <li>Pressure to give remote access</li>
+            <li>Requests for payment in gift cards or cryptocurrency</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Don't click unknown pop-ups, verify caller identity independently, run antivirus from trusted sources, and never give remote access to strangers.</p>
+        </div>
+
+        <div class="alert-card alert-low">
+          <h3>🎓 Educational Scams</h3>
+          <p><strong>What it is:</strong> Fake scholarships, admissions to foreign universities, or certification programs that require upfront payment.</p>
+          <p><strong>Red Flags:</strong></p>
+          <ul>
+            <li>Guaranteed admissions without proper applications</li>
+            <li>Unconditional scholarship offers</li>
+            <li>Requests for processing or registration fees upfront</li>
+            <li>Lack of proper institutional credentials</li>
+          </ul>
+          <p><strong>How to Protect:</strong> Contact institutions directly, check accreditation officially, verify through government databases, and be wary of guaranteed offers.</p>
+        </div>
+      </section>
+
+      <!-- General Safety Tips -->
+      <section class="panel content-section">
+        <h2>🛡️ General Safety Guidelines</h2>
+        <div class="tips-grid">
+          <div class="tip-card">
+            <h3>✅ What You Should Do</h3>
+            <ul>
+              <li>Verify identities through official channels</li>
+              <li>Use strong, unique passwords</li>
+              <li>Enable two-factor authentication</li>
+              <li>Keep software and antivirus updated</li>
+              <li>Read terms and policies before signing</li>
+              <li>Save receipts and documentation</li>
+              <li>Monitor bank statements regularly</li>
+              <li>Report suspicious activities immediately</li>
+            </ul>
+          </div>
+          <div class="tip-card warning">
+            <h3>❌ What You Should NOT Do</h3>
+            <ul>
+              <li>Share passwords, OTP, or CVV</li>
+              <li>Click links from unknown sources</li>
+              <li>Give remote access to strangers</li>
+              <li>Send money before verification</li>
+              <li>Download from untrusted sources</li>
+              <li>Share Aadhaar/PAN carelessly</li>
+              <li>Respond to unsolicited calls/messages</li>
+              <li>Ignore security warnings on websites</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- If You're a Victim -->
+      <section class="panel content-section">
+        <h2>🆘 If You Fall Victim to Fraud</h2>
+        <ol class="action-steps">
+          <li><strong>Stop Losing Money:</strong> Immediately change passwords, block accounts, and prevent further unauthorized access.</li>
+          <li><strong>Report to Police:</strong> File FIR at local police station or cybercrime cell. Get the reference number.</li>
+          <li><strong>Notify Banks/Services:</strong> Contact your bank, email provider, and other relevant services immediately.</li>
+          <li><strong>Monitor Accounts:</strong> Check credit reports, watch for unauthorized accounts opened in your name.</li>
+          <li><strong>Document Everything:</strong> Keep records of all fraudulent transactions, communications, and police complaints.</li>
+          <li><strong>Seek Legal Help:</strong> Consult a lawyer for guidance on next steps and potential recovery.</li>
+          <li><strong>Contact Helplines:</strong> Reach out to fraud helplines and consumer protection organizations (see Helplines page).</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="footer" role="contentinfo">
+      <p>
+        🔬 <strong>Spotling - Anti-Fraud Hub</strong> – Your guide to online safety and fraud awareness.
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.75rem;">
+        Stay safe. Stay vigilant. Report fraud immediately.
+      </p>
+    </footer>
+
+    <script>
+      // Theme toggle
+      const themeToggle = document.getElementById('theme-toggle');
+      const html = document.documentElement;
+      
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      html.setAttribute('data-theme', savedTheme);
+      themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+      
+      themeToggle.addEventListener('click', () => {
+        const currentTheme = html.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+      });
+    </script>
+  </body>
+</html>
