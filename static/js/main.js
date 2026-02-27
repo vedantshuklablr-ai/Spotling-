@@ -42,6 +42,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeholder = document.getElementById("placeholder");
   const resultsBlock = document.getElementById("results");
 
+  // Media preview elements
+  const mediaInput = document.getElementById("media");
+  const useDemoBtn = document.getElementById("use-demo-btn");
+  const mediaPreview = document.getElementById("media-preview");
+  const previewVideo = document.getElementById("preview-video");
+  const previewImage = document.getElementById("preview-image");
+
   // Score elements
   const deceptionScoreEl = document.getElementById("deception-score");
   const deceptionBarEl = document.getElementById("deception-bar");
@@ -154,7 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     // Get form inputs
-    const mediaInput = document.getElementById("media");
     const linkInput = document.getElementById("link_url");
 
     // Client-side validation
@@ -266,6 +272,62 @@ document.addEventListener("DOMContentLoaded", () => {
       setStatus("Unable to reach the server. Make sure the Flask app is running.", "error");
     } finally {
       setLoading(false);
+    }
+  });
+
+  /**
+   * Show preview for selected file (image or video)
+   */
+  function showPreviewFile(file) {
+    mediaPreview.setAttribute('aria-hidden', 'false');
+    previewVideo.classList.add('hidden');
+    previewImage.classList.add('hidden');
+
+    if (!file) return;
+
+    const type = file.type || '';
+    const url = URL.createObjectURL(file);
+
+    if (type.startsWith('video/')) {
+      previewVideo.src = url;
+      previewVideo.classList.remove('hidden');
+      previewVideo.load();
+    } else if (type.startsWith('image/')) {
+      previewImage.src = url;
+      previewImage.classList.remove('hidden');
+    }
+  }
+
+  // Update preview when user picks a file
+  mediaInput.addEventListener('change', () => {
+    const f = mediaInput.files && mediaInput.files[0];
+    showPreviewFile(f);
+  });
+
+  // Use demo video: fetch from static/uploads/whatsapp_demo.mp4 and attach to file input
+  useDemoBtn.addEventListener('click', async () => {
+    const demoPath = '/static/uploads/whatsapp_demo.mp4';
+    setStatus('Loading demo video…', 'success');
+    try {
+      const resp = await fetch(demoPath);
+      if (!resp.ok) {
+        throw new Error('Demo file not found. Please copy your WhatsApp video to static/uploads/whatsapp_demo.mp4');
+      }
+      const blob = await resp.blob();
+      const filename = 'whatsapp_demo.mp4';
+      const demoFile = new File([blob], filename, { type: blob.type });
+
+      // Create a DataTransfer and set the file input's files
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(demoFile);
+      mediaInput.files = dataTransfer.files;
+
+      // Show preview and clear previous status
+      showPreviewFile(demoFile);
+      setStatus('Demo video loaded. Ready to analyze.', 'success');
+    } catch (err) {
+      console.error(err);
+      setStatus(err.message || 'Failed to load demo video.', 'error');
     }
   });
 });

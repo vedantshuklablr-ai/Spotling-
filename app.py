@@ -164,6 +164,59 @@ def simple_analysis(
     return inconsistency_score, consistency_score, explanations
 
 
+# --- Uploads management helpers and endpoints ---
+UPLOAD_CLEANUP_DAYS_DEFAULT = int(os.getenv("UPLOADS_CLEANUP_DAYS", "30"))
+UPLOADS_CLEANUP_API_TOKEN = os.getenv("UPLOADS_CLEANUP_API_TOKEN", "")
+
+
+def list_uploaded_files():
+    """Return metadata for files in the uploads folder."""
+    files = []
+    try:
+        for fname in sorted(os.listdir(app.config["UPLOAD_FOLDER"]), reverse=True):
+            if fname.startswith('.'):
+                continue
+            path = os.path.join(app.config["UPLOAD_FOLDER"], fname)
+            if os.path.isfile(path):
+                st = os.stat(path)
+                files.append({
+                    "filename": fname,
+                    "size": st.st_size,
+                    "mtime": datetime.datetime.utcfromtimestamp(st.st_mtime).isoformat(),
+                })
+    except Exception as e:
+        logger.warning(f"Failed to list uploads: {e}")
+    return files
+
+
+def cleanup_uploads(older_than_days: int | str = UPLOAD_CLEANUP_DAYS_DEFAULT):
+    """Remove files older than `older_than_days` from the uploads folder.
+
+    Returns list of removed filenames.
+    """
+    removed = []
+    try:
+        days = int(older_than_days)
+        cutoff = datetime.datetime.utcnow() - datetime.timedelta(days=days)
+        for fname in os.listdir(app.config["UPLOAD_FOLDER"]):
+            if fname.startswith('.'):
+                continue
+            path = os.path.join(app.config["UPLOAD_FOLDER"], fname)
+            if os.path.isfile(path):
+                mtime = datetime.datetime.utcfromtimestamp(os.stat(path).st_mtime)
+                if mtime < cutoff:
+                    try:
+                        os.remove(path)
+                        removed.append(fname)
+                        logger.info(f"Removed upload: {fname}")
+                    except Exception as re:
+                        logger.warning(f"Failed to remove {fname}: {re}")
+    except Exception as e:
+        logger.warning(f"Failed during cleanup_uploads: {e}")
+    return removed
+
+
+
 @app.route("/", methods=["GET"])
 def index():
     """Render the main analysis page."""
@@ -427,6 +480,51 @@ def search_by_score():
         return jsonify({"error": "Failed to search analyses."}), 500
 
 
+# Uploads API: list, delete, and trigger cleanup (protected by token)
+@app.route("/api/uploads", methods=["GET"])
+def api_list_uploads():
+    """List uploaded files with metadata."""
+    files = list_uploaded_files()
+    return jsonify({"files": files}), 200
+
+
+@app.route("/api/uploads/<path:filename>", methods=["DELETE"])
+def api_delete_upload(filename):
+    """Delete a specific uploaded file by filename."""
+    secure_name = secure_filename(filename)
+    path = os.path.join(app.config["UPLOAD_FOLDER"], secure_name)
+    if not os.path.isfile(path):
+        return jsonify({"error": "File not found."}), 404
+    try:
+        os.remove(path)
+        logger.info(f"Deleted upload: {secure_name}")
+        return jsonify({"deleted": secure_name}), 200
+    except Exception as e:
+        logger.error(f"Failed to delete upload {secure_name}: {e}", exc_info=True)
+        return jsonify({"error": "Failed to delete file."}), 500
+
+
+@app.route("/api/uploads/cleanup", methods=["POST"])
+def api_cleanup_uploads():
+    """Trigger cleanup of old uploads. Requires `X-Admin-Token` header when token configured."""
+    if not UPLOADS_CLEANUP_API_TOKEN:
+        return jsonify({"error": "Cleanup API disabled (no token configured)."}), 403
+    token = request.headers.get("X-Admin-Token", "")
+    if token != UPLOADS_CLEANUP_API_TOKEN:
+        return jsonify({"error": "Unauthorized."}), 401
+
+    days = UPLOAD_CLEANUP_DAYS_DEFAULT
+    if request.is_json:
+        try:
+            days = int(request.json.get("days", days))
+        except Exception:
+            pass
+
+    removed = cleanup_uploads(days)
+    return jsonify({"removed": removed, "threshold_days": days}), 200
+
+
+
 @app.before_request
 def before_request():
     """Initialize MongoDB connection before first request."""
@@ -461,6 +559,13 @@ if __name__ == "__main__":
                 logger.warning(f"⚠️  MongoDB not available - app will work for analysis only: {db_error}")
         else:
             logger.info("MongoDB disabled (laptop demo mode). Set ENABLE_MONGODB=1 to enable it.")
+        # Run a one-time cleanup at startup (safe default)
+        try:
+            removed_at_start = cleanup_uploads()
+            if removed_at_start:
+                logger.info(f"Startup cleanup removed {len(removed_at_start)} files from uploads")
+        except Exception as e:
+            logger.warning(f"Startup cleanup failed: {e}")
         
         # Run Flask app
         app.run(

@@ -1,3 +1,49 @@
+# Tech Stack — Spotling (opinionated recommendation)
+
+Purpose: a pragmatic, scalable stack for web apps that balances developer productivity, performance, and maintainability.
+
+1) Frontend
+- Framework: React with TypeScript (Next.js for SSR/SSG when SEO or fast initial paint matters; Vite for SPA).
+- Styling: Tailwind CSS for utility-first styling; CSS Modules or Emotion for component-scoped styles when needed.
+- State: React Query (TanStack Query) + context for global UI state; consider Redux only for complex state orchestration.
+
+2) Backend / API
+- Language/runtime: Node.js + TypeScript (NestJS for opinionated, structured apps; Express/Koa for minimal services). Alternatives: Go for high-concurrency services, or Python (FastAPI) for ML-adjacent work.
+- API style: REST or GraphQL (Apollo/Hasura) depending on client needs.
+
+3) Database & Storage
+- Primary DB: PostgreSQL (ACID, relational features). Use Prisma or TypeORM as an ORM/DB toolkit.
+- Cache: Redis for sessions, rate-limiting, and caching hot reads.
+- File/storage: S3-compatible object storage (AWS S3, DigitalOcean Spaces) for assets.
+
+4) Auth & Security
+- Auth: OAuth2 / OpenID Connect for third-party login; JWTs for stateless APIs; consider an identity provider (Auth0, Clerk, or Keycloak) if you want less homegrown auth.
+- Security: HTTPS everywhere, helmet/config hardening, rate-limiting, dependency scanning.
+
+5) DevOps / Infra
+- Containerization: Docker for local parity and deployments.
+- Orchestration: Start with managed services (Vercel/Netlify for frontend, Cloud run/Heroku for backend), move to Kubernetes (EKS/GKE/AKS) as scale requires.
+- IaC: Terraform for infra provisioning; Docker Compose for local stacks.
+
+6) CI / CD
+- GitHub Actions for pipelines: lint, typecheck, test, build, and deploy stages. Keep pipelines short and cache deps.
+
+7) Testing & Quality
+- Unit: Jest + Testing Library for React.
+- E2E: Playwright or Cypress.
+- Linters/formatters: ESLint + Prettier + TypeScript strict mode.
+
+8) Observability
+- Logging: structured logs (JSON) shipped to a log provider.
+- Metrics & Tracing: Prometheus + Grafana and OpenTelemetry tracing; Sentry for errors.
+
+9) Local Developer Experience
+- Scripts: `dev`, `build`, `start`, `test`, `lint` in root package scripts.
+- Use `docker-compose` to stand up Postgres + Redis for local testing.
+
+Recommendations / Next steps
+- Pick one option per layer (example: Next.js + Node/TypeScript + PostgreSQL + Redis + GitHub Actions) and create minimal starter templates.
+- I can initialize a repo scaffold (package.json, basic directories, CI) if you want — tell me which choices you prefer.
 # 🛠️ Technology Stack - Spotling Deception Analyzer
 
 ## Complete Architecture Overview

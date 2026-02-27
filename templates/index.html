@@ -44,14 +44,23 @@
               Post Media (Photo / Video)
               <span class="required" aria-label="required">*</span>
             </label>
-            <input
-              type="file"
-              id="media"
-              name="media"
-              accept="image/*,video/*"
-              required
-              aria-describedby="media-help"
-            />
+            <div class="media-input-row">
+              <input
+                type="file"
+                id="media"
+                name="media"
+                accept="image/*,video/*"
+                required
+                aria-describedby="media-help"
+              />
+              <button type="button" id="use-demo-btn" class="secondary-button" title="Load demo WhatsApp video">
+                Use demo video
+              </button>
+            </div>
+            <div id="media-preview" class="media-preview" aria-hidden="true">
+              <video id="preview-video" class="hidden" controls muted playsinline></video>
+              <img id="preview-image" class="hidden" alt="Selected media preview" />
+            </div>
             <p id="media-help" class="form-help">
               Supported: JPG, PNG, GIF, WebP (images) or MP4, AVI, MOV, WebM (videos)
             </p>
