@@ -1,6 +1,13 @@
 SPOTLING
-https://vedantshuklablr-ai.github.io/Spotling/  
-Fake Photo/Video/Link Detector — Prototype website that flags potentially fake photos, videos, and misleading links. **Note:** This is a demonstration using simple heuristics; results may be inaccurate.
+
+🌐 Live Demo (GitHub Pages):
+https://vedantshuklablr-ai.github.io/Spotling/
+
+🚀 Live Demo (Vercel Production):
+https://spotling-ai.vercel.app
+
+Fake Photo/Video/Link Detector — Prototype website that flags potentially fake photos, videos, and misleading links.  
+**Note:** This is a demonstration using simple heuristics; results may be inaccurate.
 
 # 🔍 Spotling – Multimodal Deception Analyzer
 
