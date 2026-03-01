@@ -5,10 +5,8 @@ from pathlib import Path
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, jsonify
 
-# Import configuration and database modules
+# Import configuration
 from config import active_config
-from db import MongoDatabase
-from models.analysis import Analysis
 
 
 # Configuration
@@ -31,9 +29,8 @@ app = Flask(__name__)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = MAX_FILE_SIZE
 
-# Laptop demo mode: MongoDB is optional and disabled by default.
-# Enable only if you actually have MongoDB running locally or via Atlas.
-MONGODB_ENABLED = os.getenv("ENABLE_MONGODB", "0").strip().lower() in ("1", "true", "yes", "y")
+# No database in the simplified build
+MONGODB_ENABLED = False
 
 
 def allowed_file(filename: str) -> bool:
@@ -309,7 +306,7 @@ def analyze():
 
         logger.info(f"Analysis complete: deception={deception_score}, consistency={consistency_score}")
 
-        # Prepare analysis data
+        # Prepare analysis data (no DB persistence in simplified version)
         analysis_result = {
             "deception_score": deception_score,
             "consistency_score": consistency_score,
@@ -318,20 +315,9 @@ def analyze():
             "media_filename": media.filename,
             "link_url": link_url,
             "caption": caption,
+            "_id": None,
         }
-        
-        # Save to MongoDB (optional)
-        if MONGODB_ENABLED:
-            try:
-                stored_analysis = Analysis.create(analysis_result)
-                logger.info(f"✓ Analysis saved to MongoDB: {stored_analysis.get('_id')}")
-            except Exception as db_error:
-                logger.error(f"✗ Failed to save to MongoDB: {db_error}")
-                # Continue anyway - don't fail the analysis if DB is down
-                analysis_result["_id"] = None
-        else:
-            analysis_result["_id"] = None
-        
+
         return jsonify(analysis_result)
     except Exception as e:
         logger.error(f"Unhandled error in analyze: {e}", exc_info=True)
@@ -352,132 +338,7 @@ def internal_error(error):
     return jsonify({"error": "Internal server error. Please try again later."}), 500
 
 
-# MongoDB API Endpoints
-
-@app.route("/api/stats", methods=["GET"])
-def get_stats():
-    """
-    Get statistics from all stored analyses.
-    
-    Returns:
-        - total_analyses: Total number of analyses performed
-        - avg_deception_score: Average deception score
-        - avg_consistency_score: Average consistency score
-        - max_deception_score: Highest deception score
-        - min_deception_score: Lowest deception score
-    """
-    try:
-        if not MONGODB_ENABLED:
-            return jsonify({"error": "History/stats are disabled in laptop demo mode (MongoDB not enabled)."}), 501
-        stats = Analysis.get_stats()
-        return jsonify(stats), 200
-    except Exception as e:
-        logger.error(f"Failed to get stats: {e}")
-        return jsonify({"error": "Failed to retrieve statistics."}), 500
-
-
-@app.route("/api/history", methods=["GET"])
-def get_history():
-    """
-    Get recent analysis history.
-    
-    Query Parameters:
-        - limit: Number of results (default: 50, max: 100)
-        - skip: Number of results to skip for pagination (default: 0)
-    
-    Returns:
-        - analyses: Array of analysis documents
-        - total: Total number of analyses available
-    """
-    try:
-        if not MONGODB_ENABLED:
-            return jsonify({"error": "History is disabled in laptop demo mode (MongoDB not enabled)."}), 501
-        limit = min(int(request.args.get("limit", 50)), 100)
-        skip = int(request.args.get("skip", 0))
-        
-        analyses = Analysis.find_all(limit=limit, skip=skip)
-        total = Analysis.count_total()
-        
-        # Convert ObjectId to string for JSON serialization
-        for analysis in analyses:
-            analysis['_id'] = str(analysis['_id'])
-            analysis['timestamp'] = analysis['timestamp'].isoformat()
-        
-        return jsonify({
-            "analyses": analyses,
-            "total": total,
-            "limit": limit,
-            "skip": skip,
-        }), 200
-    except Exception as e:
-        logger.error(f"Failed to get history: {e}")
-        return jsonify({"error": "Failed to retrieve history."}), 500
-
-
-@app.route("/api/analyses/<analysis_id>", methods=["GET"])
-def get_analysis(analysis_id):
-    """
-    Get a specific analysis by ID.
-    
-    Args:
-        analysis_id: MongoDB ObjectId as string
-    
-    Returns:
-        - Complete analysis document
-    """
-    try:
-        if not MONGODB_ENABLED:
-            return jsonify({"error": "History is disabled in laptop demo mode (MongoDB not enabled)."}), 501
-        analysis = Analysis.find_by_id(analysis_id)
-        
-        if not analysis:
-            return jsonify({"error": "Analysis not found."}), 404
-        
-        # Convert ObjectId to string
-        analysis['_id'] = str(analysis['_id'])
-        analysis['timestamp'] = analysis['timestamp'].isoformat()
-        
-        return jsonify(analysis), 200
-    except Exception as e:
-        logger.error(f"Failed to get analysis: {e}")
-        return jsonify({"error": "Failed to retrieve analysis."}), 500
-
-
-@app.route("/api/analyses/search/by-score", methods=["GET"])
-def search_by_score():
-    """
-    Search analyses by deception score range.
-    
-    Query Parameters:
-        - min: Minimum deception score (default: 0)
-        - max: Maximum deception score (default: 100)
-        - limit: Number of results (default: 50, max: 100)
-    
-    Returns:
-        - analyses: Matching analysis documents
-    """
-    try:
-        if not MONGODB_ENABLED:
-            return jsonify({"error": "History/search are disabled in laptop demo mode (MongoDB not enabled)."}), 501
-        min_score = int(request.args.get("min", 0))
-        max_score = int(request.args.get("max", 100))
-        limit = min(int(request.args.get("limit", 50)), 100)
-        
-        analyses = Analysis.find_by_score_range(min_score, max_score, limit)
-        
-        # Convert ObjectId to string
-        for analysis in analyses:
-            analysis['_id'] = str(analysis['_id'])
-            analysis['timestamp'] = analysis['timestamp'].isoformat()
-        
-        return jsonify({
-            "analyses": analyses,
-            "count": len(analyses),
-            "score_range": {"min": min_score, "max": max_score}
-        }), 200
-    except Exception as e:
-        logger.error(f"Failed to search by score: {e}")
-        return jsonify({"error": "Failed to search analyses."}), 500
+# (Database-backed API removed in simplified version)
 
 
 # Uploads API: list, delete, and trigger cleanup (protected by token)
