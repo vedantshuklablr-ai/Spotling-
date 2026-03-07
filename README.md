@@ -20,6 +20,7 @@ Spotling is a comprehensive web application that empowers users to protect thems
 - **📝 Linguistic Analysis**: Bot pattern detection and sensational language identification  
 - **🔄 Cross-Modal Verification**: Ensures consistency between text and visual content
 - **📊 Dual Speedometer Interface**: Intuitive risk scoring system
+- **📚 Analysis History**: Track and review all previous deception detection analyses
 - **🎨 3D Animations**: Beautiful visual effects and smooth transitions
 - **🗣️ Voice System**: Text-to-speech and speech-to-text capabilities
 - **🌙 Dark/Light Theme**: User preference with system integration
@@ -90,6 +91,14 @@ npm run start    # Start production server
 - Dual speedometer displays
 - Evidence layer breakdowns
 - Voice feedback
+- Automatic history saving
+
+### **📚 History**
+- View all previous analyses
+- Search and filter history
+- Risk level statistics
+- Delete individual items or clear all
+- Persistent storage using localStorage
 
 ### **🚨 Fraud Alerts**
 - Trending scam keywords

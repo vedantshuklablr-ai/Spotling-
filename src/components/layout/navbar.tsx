@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useState } from "react"
-import { Menu, X, Search, Shield, Moon, Sun } from "lucide-react"
+import { Menu, X, Search, Shield, Moon, Sun, Clock } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useTheme } from "next-themes"
@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card"
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Analyzer", href: "/analyzer" },
+  { name: "History", href: "/history" },
   { name: "Fraud Alerts", href: "/fraud-alerts" },
   { name: "Guidelines", href: "/guidelines" },
   { name: "Safety Tips", href: "/safety-tips" },

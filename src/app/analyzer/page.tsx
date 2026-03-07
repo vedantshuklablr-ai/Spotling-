@@ -63,6 +63,28 @@ export default function Analyzer() {
       ]
     }
     
+    // Save to history
+    const historyItem = {
+      id: Date.now().toString(),
+      timestamp: new Date(),
+      type: imageFile ? "image" : "text" as "image" | "text",
+      content: caption || postUrl || "Image analysis",
+      deceptionScore: mockResult.deceptionScore,
+      consistencyScore: mockResult.consistencyScore,
+      riskLevel: mockResult.riskLevel,
+      status: "completed" as const,
+      thumbnail: imageFile ? URL.createObjectURL(imageFile) : undefined,
+      caption: caption || undefined,
+      url: postUrl || undefined
+    }
+    
+    // Get existing history
+    const existingHistory = JSON.parse(localStorage.getItem("spotling-history") || "[]")
+    const updatedHistory = [historyItem, ...existingHistory]
+    
+    // Save to localStorage
+    localStorage.setItem("spotling-history", JSON.stringify(updatedHistory))
+    
     setResult(mockResult)
     setIsAnalyzing(false)
     
