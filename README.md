@@ -6,8 +6,7 @@
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3.4.0-38B2AC)](https://tailwindcss.com/)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-Online-green)](https://spotling-deception-detector.vercel.app)
 
-> 🚀 **Live Demo**: [https://spotling-deception-detector.vercel.app](https://spotling-deception-detector.vercel.app)  
-> 📁 **Repository**: [https://github.com/vedantshuklablr-ai/Spotling-](https://github.com/vedantshuklablr-ai/Spotling-)
+> 🚀 **Live Demo**: <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/75b02a80-dca8-4b80-a7d3-3ba782ca87ed" />
 
 A sophisticated **Next.js 14** application designed to detect digital deception using advanced AI analysis across multiple modalities. Spotling helps users identify deepfakes, phishing attempts, and fraudulent content through comprehensive visual, linguistic, and cross-modal analysis.
 
