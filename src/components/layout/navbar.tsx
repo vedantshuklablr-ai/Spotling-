@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { useTheme } from "next-themes"
 import { VoiceSystem } from "@/components/voice-system"
 import { SearchModal } from "@/components/search-modal"
+import { Card, CardContent } from "@/components/ui/card"
 
 const navigation = [
   { name: "Home", href: "/" },
