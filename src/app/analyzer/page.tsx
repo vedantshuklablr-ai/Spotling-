@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { useVoiceSystem } from "@/components/voice-system"
-import { analyzeImage, analyzeText, analyzeVideo, fileToBase64, detectThreat, calculateDeceptionScore, calculateConsistencyScore, determineRiskLevel } from "@/lib/api-service"
+import { analyzeImage, analyzeText, analyzeVideo, fileToBase64, detectThreat, calculateDeceptionScore, calculateConsistencyScore, determineRiskLevel, isApiConfigured } from "@/lib/api-service"
 
 interface AnalysisResult {
   deceptionScore: number
@@ -48,6 +48,9 @@ export default function Analyzer() {
   const [postUrl, setPostUrl] = useState("")
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const { speak, playClickSound } = useVoiceSystem()
+
+  // Check API configuration
+  const apiConfigured = isApiConfigured()
 
   const handleAnalyze = async () => {
     if (!imageFile && !videoFile && !caption) {
@@ -284,6 +287,22 @@ export default function Analyzer() {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Upload an image and caption to detect potential deception using our multimodal AI analysis
           </p>
+          
+          {/* API Status Indicator */}
+          <div className="flex justify-center mt-4">
+            <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-sm ${
+              apiConfigured 
+                ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300' 
+                : 'bg-yellow-100 dark:bg-yellow-900 text-yellow-700 dark:text-yellow-300'
+            }`}>
+              <div className={`w-2 h-2 rounded-full ${
+                apiConfigured ? 'bg-green-500' : 'bg-yellow-500'
+              }`} />
+              <span className="font-medium">
+                {apiConfigured ? 'Google Vision AI Connected' : 'Using Mock Analysis'}
+              </span>
+            </div>
+          </div>
         </motion.div>
 
         {!result ? (

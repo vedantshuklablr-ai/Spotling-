@@ -70,6 +70,10 @@ cd Spotling-
 # Install dependencies
 npm install
 
+# Configure environment variables (optional)
+# Create .env.local file and add your Google Vision API key:
+# NEXT_PUBLIC_GOOGLE_VISION_API_KEY=your_api_key_here
+
 # Start development server
 npm run dev
 
@@ -87,7 +91,34 @@ npm run start    # Start production server
 
 ---
 
-## 📱 **Pages Overview**
+## � **API Configuration (Optional)**
+
+### **Google Vision AI Setup**
+
+To enable real AI-powered image analysis, you can configure the Google Vision AI API:
+
+1. **Get API Key**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project or select existing one
+   - Enable Vision AI API
+   - Create credentials (API Key)
+
+2. **Configure Environment**:
+   ```bash
+   # Create .env.local file in project root
+   echo "NEXT_PUBLIC_GOOGLE_VISION_API_KEY=your_api_key_here" > .env.local
+   ```
+
+3. **Restart Development Server**:
+   ```bash
+   npm run dev
+   ```
+
+**Note**: The application works perfectly without the API key using mock analysis. The API integration provides enhanced accuracy when configured.
+
+---
+
+## �📱 **Pages Overview**
 
 ### **🏠 Home Page**
 - Hero section with animated 3D shield

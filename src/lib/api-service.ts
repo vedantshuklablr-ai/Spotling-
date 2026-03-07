@@ -1,9 +1,17 @@
 // API Configuration
-const API_KEY = "AIzaSyAYZVZM9VUSkN8lKQWRyb0XzgF8-vopX7M"
+const API_KEY = process.env.NEXT_PUBLIC_GOOGLE_VISION_API_KEY || ""
 const API_BASE_URL = "https://vision.googleapis.com/v1"
+
+// Check if API key is available
+const hasApiKey = API_KEY && API_KEY.length > 0
 
 // Image Analysis API
 export async function analyzeImage(imageBase64: string) {
+  if (!hasApiKey) {
+    console.log('Google Vision API key not configured, using mock analysis')
+    return null
+  }
+
   try {
     const response = await fetch(`${API_BASE_URL}/images:annotate?key=${API_KEY}`, {
       method: 'POST',
@@ -113,7 +121,7 @@ export function detectThreat(analysisData: any, contentType: string) {
 export function calculateDeceptionScore(analysisData: any, contentType: string) {
   let baseScore = 30 // Base score
 
-  if (contentType === 'image' && analysisData?.responses?.[0]) {
+  if (hasApiKey && contentType === 'image' && analysisData?.responses?.[0]) {
     const response = analysisData.responses[0]
     
     // Check for suspicious labels
@@ -138,6 +146,9 @@ export function calculateDeceptionScore(analysisData: any, contentType: string) 
       // Add score based on face detection confidence
       baseScore += (1 - Math.min(...response.faceAnnotations.map((face: any) => face.detectionConfidence))) * 25
     }
+  } else {
+    // Use mock scoring when API is not available
+    baseScore += Math.floor(Math.random() * 40)
   }
 
   return Math.min(Math.floor(baseScore + Math.random() * 20), 100)
@@ -153,4 +164,9 @@ export function determineRiskLevel(deceptionScore: number): "Low" | "Medium" | "
   if (deceptionScore < 40) return "Low"
   if (deceptionScore < 70) return "Medium"
   return "High"
+}
+
+// Check if API is configured
+export function isApiConfigured() {
+  return hasApiKey
 }
