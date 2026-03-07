@@ -17,11 +17,13 @@ Spotling is a comprehensive web application that empowers users to protect thems
 
 ### **🔥 Key Features**
 - **🔍 Visual Forensics**: Advanced image manipulation and deepfake detection
+- **🎥 Video Analysis**: Deepfake video detection and synthetic media identification
 - **📝 Linguistic Analysis**: Bot pattern detection and sensational language identification  
 - **🔄 Cross-Modal Verification**: Ensures consistency between text and visual content
 - **📊 Dual Speedometer Interface**: Intuitive risk scoring system
 - **📚 Analysis History**: Track and review all previous deception detection analyses
 - **🧮 Model Score Matrix**: Detailed breakdown of AI model scores across different analysis categories
+- **⚠️ Threat Detection**: Identify specific threat types with detailed explanations
 - **🎨 3D Animations**: Beautiful visual effects and smooth transitions
 - **🗣️ Voice System**: Text-to-speech and speech-to-text capabilities
 - **🌙 Dark/Light Theme**: User preference with system integration
@@ -88,12 +90,14 @@ npm run start    # Start production server
 
 ### **🔍 Analyzer**
 - Image upload with drag-and-drop
+- **Video upload support** - Analyze video content for deepfakes
 - Caption and URL input
 - Dual speedometer displays
 - Evidence layer breakdowns
 - Voice feedback
 - Automatic history saving
 - **Model Score Matrix** - Detailed breakdown of AI model scores
+- **Threat Detection** - Identify specific threat types with explanations
 
 ### **📚 History**
 - View all previous analyses

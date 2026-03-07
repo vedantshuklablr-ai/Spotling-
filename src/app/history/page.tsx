@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Clock, FileText, Image, AlertTriangle, CheckCircle, Eye, Trash2, Search, Filter, Calendar } from "lucide-react"
+import { Clock, FileText, Image, AlertTriangle, CheckCircle, Eye, Trash2, Search, Filter, Calendar, Video } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -12,7 +12,7 @@ import { Badge } from "@/components/ui/badge"
 interface HistoryItem {
   id: string
   timestamp: Date
-  type: "image" | "text" | "url"
+  type: "image" | "video" | "text" | "url"
   content: string
   deceptionScore: number
   consistencyScore: number
@@ -21,6 +21,8 @@ interface HistoryItem {
   thumbnail?: string
   caption?: string
   url?: string
+  threatType?: string
+  threatDescription?: string
   modelScores?: {
     visualModel: {
       deepfake: number
@@ -43,7 +45,7 @@ interface HistoryItem {
 export default function HistoryPage() {
   const [history, setHistory] = useState<HistoryItem[]>([])
   const [searchTerm, setSearchTerm] = useState("")
-  const [filterType, setFilterType] = useState<"all" | "image" | "text" | "url">("all")
+  const [filterType, setFilterType] = useState<"all" | "image" | "video" | "text" | "url">("all")
   const [filterRisk, setFilterRisk] = useState<"all" | "Low" | "Medium" | "High">("all")
 
   // Load history from localStorage on mount
@@ -91,6 +93,7 @@ export default function HistoryPage() {
   const getTypeIcon = (type: string) => {
     switch (type) {
       case "image": return <Image className="h-4 w-4" />
+      case "video": return <Video className="h-4 w-4" />
       case "text": return <FileText className="h-4 w-4" />
       case "url": return <Eye className="h-4 w-4" />
       default: return <FileText className="h-4 w-4" />
@@ -175,6 +178,15 @@ export default function HistoryPage() {
                   >
                     <Image className="h-4 w-4 mr-1" />
                     Images
+                  </Button>
+                  <Button
+                    variant={filterType === "video" ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilterType("video")}
+                    className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  >
+                    <Video className="h-4 w-4 mr-1" />
+                    Videos
                   </Button>
                   <Button
                     variant={filterType === "text" ? "default" : "outline"}

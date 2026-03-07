@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Upload, Image, FileText, AlertTriangle, CheckCircle, Shield, Eye, Brain, Zap } from "lucide-react"
+import { Upload, Image, FileText, AlertTriangle, CheckCircle, Shield, Eye, Brain, Zap, Video, Play } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,6 +15,8 @@ interface AnalysisResult {
   deceptionScore: number
   consistencyScore: number
   riskLevel: "Low" | "Medium" | "High"
+  threatType: string
+  threatDescription: string
   visualEvidence: string[]
   linguisticEvidence: string[]
   crossModalEvidence: string[]
@@ -40,15 +42,16 @@ interface AnalysisResult {
 export default function Analyzer() {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [imageFile, setImageFile] = useState<File | null>(null)
+  const [videoFile, setVideoFile] = useState<File | null>(null)
   const [caption, setCaption] = useState("")
   const [postUrl, setPostUrl] = useState("")
   const [result, setResult] = useState<AnalysisResult | null>(null)
   const { speak, playClickSound } = useVoiceSystem()
 
   const handleAnalyze = async () => {
-    if (!imageFile && !caption) {
+    if (!imageFile && !videoFile && !caption) {
       playClickSound()
-      alert("Please upload an image or enter a caption to analyze")
+      alert("Please upload an image/video or enter a caption to analyze")
       return
     }
 
@@ -58,11 +61,47 @@ export default function Analyzer() {
     // Simulate analysis delay
     await new Promise(resolve => setTimeout(resolve, 3000))
     
+    // Determine threat type based on content
+    const getThreatType = () => {
+      if (videoFile) {
+        const threats = ["Deepfake Video", "Manipulated Content", "Synthetic Media", "AI-Generated Video"]
+        return threats[Math.floor(Math.random() * threats.length)]
+      } else if (imageFile) {
+        const threats = ["Image Manipulation", "Deepfake Image", "Digital Forgery", "Altered Photo"]
+        return threats[Math.floor(Math.random() * threats.length)]
+      } else {
+        const threats = ["Fake News", "Misinformation", "Propaganda", "Clickbait"]
+        return threats[Math.floor(Math.random() * threats.length)]
+      }
+    }
+
+    const getThreatDescription = (type: string) => {
+      const descriptions: Record<string, string> = {
+        "Deepfake Video": "AI-generated video that replaces faces or manipulates existing footage to create false narratives.",
+        "Manipulated Content": "Video or image that has been digitally altered to misrepresent reality.",
+        "Synthetic Media": "Computer-generated content designed to appear authentic for deceptive purposes.",
+        "AI-Generated Video": "Video created entirely by artificial intelligence without real footage.",
+        "Image Manipulation": "Photo edited to change context, people, or events to spread false information.",
+        "Deepfake Image": "AI-generated or manipulated image depicting people or events that never occurred.",
+        "Digital Forgery": "Falsified digital content created to deceive viewers about authenticity.",
+        "Altered Photo": "Modified image that misrepresents the original scene or context.",
+        "Fake News": "False information presented as legitimate news to manipulate public opinion.",
+        "Misinformation": "Inaccurate information spread regardless of intent to deceive.",
+        "Propaganda": "Biased or misleading information used to promote a particular political cause.",
+        "Clickbait": "Content designed to attract attention and encourage visitors to click through."
+      }
+      return descriptions[type] || "Suspicious content that may contain deceptive elements."
+    }
+    
+    const threatType = getThreatType()
+    
     // Mock analysis result
     const mockResult: AnalysisResult = {
       deceptionScore: Math.floor(Math.random() * 40) + 30, // 30-70 range
       consistencyScore: Math.floor(Math.random() * 30) + 50, // 50-80 range
       riskLevel: "Medium",
+      threatType,
+      threatDescription: getThreatDescription(threatType),
       visualEvidence: [
         "Potential image manipulation detected",
         "Inconsistent lighting patterns",
@@ -101,13 +140,13 @@ export default function Analyzer() {
     const historyItem = {
       id: Date.now().toString(),
       timestamp: new Date(),
-      type: imageFile ? "image" : "text" as "image" | "text",
-      content: caption || postUrl || "Image analysis",
+      type: videoFile ? "video" : imageFile ? "image" : "text" as "video" | "image" | "text",
+      content: caption || postUrl || videoFile ? "Video analysis" : "Image analysis",
       deceptionScore: mockResult.deceptionScore,
       consistencyScore: mockResult.consistencyScore,
       riskLevel: mockResult.riskLevel,
       status: "completed" as const,
-      thumbnail: imageFile ? URL.createObjectURL(imageFile) : undefined,
+      thumbnail: imageFile ? URL.createObjectURL(imageFile) : videoFile ? URL.createObjectURL(videoFile) : undefined,
       caption: caption || undefined,
       url: postUrl || undefined,
       modelScores: mockResult.modelScores
@@ -271,6 +310,40 @@ export default function Analyzer() {
                   </div>
                 </div>
 
+                {/* Video Upload */}
+                <div className="space-y-2">
+                  <Label htmlFor="video" className="text-sm font-medium">
+                    Upload Video
+                  </Label>
+                  <div className="border-2 border-dashed border-border rounded-lg p-6 text-center hover:border-primary/50 transition-colors">
+                    <input
+                      id="video"
+                      type="file"
+                      accept="video/*"
+                      onChange={(e) => setVideoFile(e.target.files?.[0] || null)}
+                      className="hidden"
+                    />
+                    <label htmlFor="video" className="cursor-pointer">
+                      {videoFile ? (
+                        <div className="space-y-2">
+                          <Video className="h-12 w-12 text-primary mx-auto" />
+                          <p className="text-sm text-muted-foreground">{videoFile.name}</p>
+                        </div>
+                      ) : (
+                        <div className="space-y-2">
+                          <Play className="h-12 w-12 text-muted-foreground mx-auto" />
+                          <p className="text-sm text-muted-foreground">
+                            Click to upload or drag and drop
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            MP4, AVI, MOV up to 50MB
+                          </p>
+                        </div>
+                      )}
+                    </label>
+                  </div>
+                </div>
+
                 {/* Caption Input */}
                 <div className="space-y-2">
                   <Label htmlFor="caption" className="text-sm font-medium">
@@ -302,7 +375,7 @@ export default function Analyzer() {
                 {/* Analyze Button */}
                 <Button
                   onClick={handleAnalyze}
-                  disabled={isAnalyzing || (!imageFile && !caption)}
+                  disabled={isAnalyzing || (!imageFile && !videoFile && !caption)}
                   className="w-full"
                   size="lg"
                 >
@@ -341,6 +414,50 @@ export default function Analyzer() {
                 Risk Level: {result.riskLevel}
               </span>
             </div>
+
+            {/* Threat Detection */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <AlertTriangle className="h-5 w-5 text-orange-500" />
+                  Threat Detection
+                </CardTitle>
+                <CardDescription>
+                  Identified threat type and detailed explanation
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="px-3 py-1 bg-red-100 dark:bg-red-900 rounded-full">
+                      <span className="text-sm font-semibold text-red-700 dark:text-red-300">
+                        {result.threatType}
+                      </span>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {result.threatDescription}
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                    <div className="text-center p-3 bg-red-50 dark:bg-red-950 rounded-lg">
+                      <AlertTriangle className="h-6 w-6 text-red-500 mx-auto mb-2" />
+                      <div className="text-sm font-medium">High Risk</div>
+                      <div className="text-xs text-muted-foreground">Requires immediate attention</div>
+                    </div>
+                    <div className="text-center p-3 bg-yellow-50 dark:bg-yellow-950 rounded-lg">
+                      <Shield className="h-6 w-6 text-yellow-500 mx-auto mb-2" />
+                      <div className="text-sm font-medium">Verify Source</div>
+                      <div className="text-xs text-muted-foreground">Check content authenticity</div>
+                    </div>
+                    <div className="text-center p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                      <Eye className="h-6 w-6 text-blue-500 mx-auto mb-2" />
+                      <div className="text-sm font-medium">Report Content</div>
+                      <div className="text-xs text-muted-foreground">Help protect others</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Speedometers */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
