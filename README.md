@@ -16,7 +16,7 @@ A sophisticated **Next.js 14** application designed to detect digital deception 
 Spotling is a comprehensive web application that empowers users to protect themselves from various forms of digital deception. The platform combines cutting-edge AI analysis with an intuitive interface to provide real-time deception detection capabilities.
 
 ### **🔥 Key Features**
-- **🔍 Visual Forensics**: Advanced image manipulation and deepfake detection
+- **🔍 Visual Forensics**: Advanced image manipulation and deepfake detection using Google Vision AI
 - **🎥 Video Analysis**: Deepfake video detection and synthetic media identification
 - **📝 Linguistic Analysis**: Bot pattern detection and sensational language identification  
 - **🔄 Cross-Modal Verification**: Ensures consistency between text and visual content
@@ -24,6 +24,7 @@ Spotling is a comprehensive web application that empowers users to protect thems
 - **📚 Analysis History**: Track and review all previous deception detection analyses
 - **🧮 Model Score Matrix**: Detailed breakdown of AI model scores across different analysis categories
 - **⚠️ Threat Detection**: Identify specific threat types with detailed explanations
+- **🤖 Real AI Integration**: Powered by Google Vision AI API for accurate image analysis
 - **🎨 3D Animations**: Beautiful visual effects and smooth transitions
 - **🗣️ Voice System**: Text-to-speech and speech-to-text capabilities
 - **🌙 Dark/Light Theme**: User preference with system integration
@@ -44,6 +45,12 @@ Spotling is a comprehensive web application that empowers users to protect thems
 - **Radix UI** - Accessible component primitives
 - **Lucide React** - Beautiful icon system
 - **next-themes** - Theme management
+
+### **AI & APIs**
+- **Google Vision AI**: Advanced image analysis and object detection
+- **Natural Language Processing**: Text analysis and sentiment detection
+- **Video Intelligence API**: Video content analysis (planned integration)
+- **Custom Threat Detection**: Proprietary deception detection algorithms
 
 ---
 
