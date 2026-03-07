@@ -5,8 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "next start"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
@@ -28,8 +27,6 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.14",
-    "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
     "postcss": "^8.4.24",
     "tailwindcss": "^4",
     "typescript": "^5"
