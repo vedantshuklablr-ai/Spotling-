@@ -21,6 +21,23 @@ interface HistoryItem {
   thumbnail?: string
   caption?: string
   url?: string
+  modelScores?: {
+    visualModel: {
+      deepfake: number
+      manipulation: number
+      authenticity: number
+    }
+    linguisticModel: {
+      sensationalism: number
+      botPattern: number
+      credibility: number
+    }
+    crossModalModel: {
+      textImageConsistency: number
+      contextualAlignment: number
+      temporalCoherence: number
+    }
+  }
 }
 
 export default function HistoryPage() {

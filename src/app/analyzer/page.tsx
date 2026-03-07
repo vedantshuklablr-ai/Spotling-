@@ -18,6 +18,23 @@ interface AnalysisResult {
   visualEvidence: string[]
   linguisticEvidence: string[]
   crossModalEvidence: string[]
+  modelScores: {
+    visualModel: {
+      deepfake: number
+      manipulation: number
+      authenticity: number
+    }
+    linguisticModel: {
+      sensationalism: number
+      botPattern: number
+      credibility: number
+    }
+    crossModalModel: {
+      textImageConsistency: number
+      contextualAlignment: number
+      temporalCoherence: number
+    }
+  }
 }
 
 export default function Analyzer() {
@@ -60,7 +77,24 @@ export default function Analyzer() {
         "Caption doesn't fully match visual content",
         "Context inconsistencies found",
         "Temporal mismatch detected"
-      ]
+      ],
+      modelScores: {
+        visualModel: {
+          deepfake: Math.floor(Math.random() * 30) + 20,
+          manipulation: Math.floor(Math.random() * 40) + 30,
+          authenticity: Math.floor(Math.random() * 25) + 60
+        },
+        linguisticModel: {
+          sensationalism: Math.floor(Math.random() * 50) + 30,
+          botPattern: Math.floor(Math.random() * 35) + 25,
+          credibility: Math.floor(Math.random() * 30) + 50
+        },
+        crossModalModel: {
+          textImageConsistency: Math.floor(Math.random() * 40) + 40,
+          contextualAlignment: Math.floor(Math.random() * 35) + 45,
+          temporalCoherence: Math.floor(Math.random() * 30) + 50
+        }
+      }
     }
     
     // Save to history
@@ -75,7 +109,8 @@ export default function Analyzer() {
       status: "completed" as const,
       thumbnail: imageFile ? URL.createObjectURL(imageFile) : undefined,
       caption: caption || undefined,
-      url: postUrl || undefined
+      url: postUrl || undefined,
+      modelScores: mockResult.modelScores
     }
     
     // Get existing history
@@ -327,6 +362,97 @@ export default function Analyzer() {
                 </CardContent>
               </Card>
             </div>
+
+            {/* Score Matrix */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Brain className="h-5 w-5 text-primary" />
+                  Model Score Matrix
+                </CardTitle>
+                <CardDescription>
+                  Detailed breakdown of scores from different AI models
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-6">
+                  {/* Visual Model */}
+                  <div>
+                    <h4 className="font-semibold text-sm text-primary mb-3">Visual Analysis Model</h4>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
+                        <div className="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                          {result.modelScores.visualModel.deepfake}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Deepfake Detection</div>
+                      </div>
+                      <div className="text-center p-3 bg-purple-50 dark:bg-purple-950 rounded-lg">
+                        <div className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+                          {result.modelScores.visualModel.manipulation}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Manipulation</div>
+                      </div>
+                      <div className="text-center p-3 bg-green-50 dark:bg-green-950 rounded-lg">
+                        <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                          {result.modelScores.visualModel.authenticity}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Authenticity</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Linguistic Model */}
+                  <div>
+                    <h4 className="font-semibold text-sm text-primary mb-3">Linguistic Analysis Model</h4>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-3 bg-red-50 dark:bg-red-950 rounded-lg">
+                        <div className="text-2xl font-bold text-red-600 dark:text-red-400">
+                          {result.modelScores.linguisticModel.sensationalism}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Sensationalism</div>
+                      </div>
+                      <div className="text-center p-3 bg-orange-50 dark:bg-orange-950 rounded-lg">
+                        <div className="text-2xl font-bold text-orange-600 dark:text-orange-400">
+                          {result.modelScores.linguisticModel.botPattern}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Bot Pattern</div>
+                      </div>
+                      <div className="text-center p-3 bg-teal-50 dark:bg-teal-950 rounded-lg">
+                        <div className="text-2xl font-bold text-teal-600 dark:text-teal-400">
+                          {result.modelScores.linguisticModel.credibility}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Credibility</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Cross-Modal Model */}
+                  <div>
+                    <h4 className="font-semibold text-sm text-primary mb-3">Cross-Modal Analysis Model</h4>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="text-center p-3 bg-indigo-50 dark:bg-indigo-950 rounded-lg">
+                        <div className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">
+                          {result.modelScores.crossModalModel.textImageConsistency}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Text-Image Consistency</div>
+                      </div>
+                      <div className="text-center p-3 bg-pink-50 dark:bg-pink-950 rounded-lg">
+                        <div className="text-2xl font-bold text-pink-600 dark:text-pink-400">
+                          {result.modelScores.crossModalModel.contextualAlignment}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Contextual Alignment</div>
+                      </div>
+                      <div className="text-center p-3 bg-cyan-50 dark:bg-cyan-950 rounded-lg">
+                        <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400">
+                          {result.modelScores.crossModalModel.temporalCoherence}%
+                        </div>
+                        <div className="text-xs text-muted-foreground">Temporal Coherence</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
 
             {/* Evidence Layers */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
